@@ -577,10 +577,10 @@ require('lazy').setup({
 
       -- You can add other tools here that you want Mason to install
       -- for you, so that they are available from within Neovim.
-      local ensure_installed = vim.tbl_keys(servers or {})
-      vim.list_extend(ensure_installed, {
-        'stylua', -- Used to format Lua code
-      })
+      -- local ensure_installed = vim.tbl_keys(servers or {})
+      -- vim.list_extend(ensure_installed, {
+      -- 'stylua', -- Used to format Lua code
+      -- })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
@@ -869,6 +869,34 @@ require('lazy').setup({
     },
   },
 })
+
+local lua_capabilities = vim.lsp.protocol.make_client_capabilities()
+lua_capabilities = vim.tbl_deep_extend('force', lua_capabilities, require('cmp_nvim_lsp').default_capabilities())
+
+-- Added pacman's: lua-language-server
+require('lspconfig').lua_ls.setup {
+  on_init = function(client)
+    local path = client.workspace_folders[1].name
+    if vim.loop.fs_stat(path .. '/luarc.json') or vim.loop.fs_stat(path .. '/.luard.jsonc') then
+      return
+    end
+    client.config.settingsLua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+      runtime = {
+        version = 'LuaJIT',
+      },
+      workspace = {
+        checkThirdParty = false,
+        library = {
+          vim.env.VIMRUNTIME,
+        },
+      },
+    })
+  end,
+  settings = {
+    Lua = {},
+  },
+  capabilities = lua_capabilities,
+}
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
