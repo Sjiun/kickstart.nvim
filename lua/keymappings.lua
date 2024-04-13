@@ -20,9 +20,9 @@ vim.keymap.set('n', '<M-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<M-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<M-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
--- tab navigation
-vim.keymap.set('n', '<Tab>', 'gt', { desc = 'Go to next tab page' })
-vim.keymap.set('n', '<S-Tab>', 'gT', { desc = 'Go to previous tab page' })
+-- buffer navigation
+vim.keymap.set('n', '<Tab>', ':bnext<CR>', { desc = 'Go to next tab page' })
+vim.keymap.set('n', '<S-Tab>', ':bprevious<CR>', { desc = 'Go to previous tab page' })
 
 -- enter new line
 vim.keymap.set('n', '<CR>', '$a<CR>', { desc = 'Create new line at end of line' })
@@ -42,8 +42,14 @@ vim.keymap.set('v', '<M-f>', [[y/<C-r>=escape(@", '\/.*$^~[]')<CR>]], { desc = '
 -- vim.keymap.set('v', '<M-F>', [[<leader>sg<C-r>=escape(@", '\/.*$^~[]')]], { desc = '[F]ind selection in live grep' })
 
 -- explorer
-vim.keymap.set('n', '<M-e>', ':E<CR>', { desc = 'open [E]xplorer' })
-vim.keymap.set('n', '<M-E>', '<C-w><C-v>:E<CR>', { desc = 'open [E]xplorer in vertical split' })
+-- vim.keymap.set('n', '<M-e>', ':E<CR>', { desc = 'open [E]xplorer' })
+-- vim.keymap.set('n', '<M-E>', '<C-w><C-v>:E<CR>', { desc = 'open [E]xplorer in vertical split' })
 
 -- move between lines
 vim.api.nvim_set_option('whichwrap', 'lh')
+
+-- nvim tree
+vim.keymap.set('n', '<leader>tt', ':NvimTreeToggle<CR>', { desc = '[T]ree [T]oggle' })
+vim.keymap.set('n', '<leader>tf', ':NvimTreeFindFile<CR>', { desc = '[T]ree [F]ind file' })
+vim.keymap.set('n', '<leader>tc', ':NvimTreeCollapse<CR>', { desc = '[T]ree [C]ollapse' })
+vim.keymap.set('n', '<leader>te', ':NvimTreeFocus<CR>', { desc = '[T]ree Focus ([E]xplore)' })
