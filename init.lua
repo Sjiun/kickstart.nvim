@@ -565,6 +565,8 @@ require('lazy').setup({
             },
           },
         },
+        tsserver = {},
+        angularls = {},
       }
 
       -- Ensure the servers and tools above are installed
