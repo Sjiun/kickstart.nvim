@@ -258,19 +258,22 @@ require('lazy').setup({
     },
   },
 
+  -- CUSTOM:
   -- file explorer (nvim-tree: https://github.com/nvim-tree/nvim-tree.lua)
   {
-    "nvim-tree/nvim-tree.lua",
-    version = "*",
+    'nvim-tree/nvim-tree.lua',
+    version = '*',
     lazy = false,
     dependencies = {
-      "nvim-tree/nvim-web-devicons",
+      'nvim-tree/nvim-web-devicons',
     },
     config = function()
-      require("nvim-tree").setup {}
+      require('nvim-tree').setup {}
     end,
   },
-
+  -- CUSTOM:
+  -- gruvbox theme (https://github.com/ellisonleao/gruvbox.nvim)
+  { 'ellisonleao/gruvbox.nvim', priority = 1000, config = true, opts = { contrast = 'hard' } },
 
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
@@ -888,6 +891,10 @@ require('lazy').setup({
 
 -- custom autocommands (./lua/keymappings.lua)
 require 'keymappings'
+
+-- CUSTOM theme
+vim.o.background = 'dark'
+vim.cmd [[colorscheme gruvbox]]
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
