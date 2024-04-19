@@ -258,6 +258,23 @@ require('lazy').setup({
     },
   },
 
+  -- CUSTOM:
+  -- file explorer (nvim-tree: https://github.com/nvim-tree/nvim-tree.lua)
+  {
+    'nvim-tree/nvim-tree.lua',
+    version = '*',
+    lazy = false,
+    dependencies = {
+      'nvim-tree/nvim-web-devicons',
+    },
+    config = function()
+      require('nvim-tree').setup {}
+    end,
+  },
+  -- CUSTOM:
+  -- gruvbox theme (https://github.com/ellisonleao/gruvbox.nvim)
+  { 'ellisonleao/gruvbox.nvim', priority = 1000, config = true, opts = { contrast = 'hard' } },
+
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
   -- This is often very useful to both group configuration, as well as handle
@@ -565,6 +582,8 @@ require('lazy').setup({
             },
           },
         },
+        tsserver = {},
+        angularls = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -577,10 +596,10 @@ require('lazy').setup({
 
       -- You can add other tools here that you want Mason to install
       -- for you, so that they are available from within Neovim.
-      -- local ensure_installed = vim.tbl_keys(servers or {})
-      -- vim.list_extend(ensure_installed, {
-      -- 'stylua', -- Used to format Lua code
-      -- })
+      local ensure_installed = vim.tbl_keys(servers or {})
+      vim.list_extend(ensure_installed, {
+      'stylua', -- Used to format Lua code
+      })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
@@ -869,6 +888,12 @@ require('lazy').setup({
     },
   },
 })
+
+-- custom autocommands (./lua/keymappings.lua)
+require 'keymappings'
+-- CUSTOM theme
+vim.o.background = 'dark'
+vim.cmd [[colorscheme gruvbox]]
 
 local lua_capabilities = vim.lsp.protocol.make_client_capabilities()
 lua_capabilities = vim.tbl_deep_extend('force', lua_capabilities, require('cmp_nvim_lsp').default_capabilities())
