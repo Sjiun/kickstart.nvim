@@ -1,0 +1,30 @@
+Windows Registry Editor Version 5.00
+
+; Open nvim from the file explorer's right-click menu
+; Thanks to https://github.com/neovim/neovim/issues/7222 <3
+
+
+; background
+[HKEY_CLASSES_ROOT\Directory\Background\shell\nvim-here]
+@="&Neovim here"
+"Icon"="\"C:\\Program Files\\Neovim\\bin\\nvim-qt.exe\""
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\nvim-here\command]
+@="cmd.exe /k cd /d \"%V\" && nvim ."
+
+; sub directory
+[HKEY_CLASSES_ROOT\Directory\shell\nvim-open]
+@="&Open in Neovim"
+"Icon"="\"C:\\Program Files\\Neovim\\bin\\nvim-qt.exe\""
+
+[HKEY_CLASSES_ROOT\Directory\shell\nvim-open\command]
+@="cmd.exe /k nvim \"%1\""
+
+; file
+[HKEY_CLASSES_ROOT\*\shell\nvim-open]
+@="&Open in Neovim"
+"Icon"="\"C:\\Program Files\\Neovim\\bin\\nvim-qt.exe\""
+
+[HKEY_CLASSES_ROOT\*\shell\nvim-open\command]
+@="cmd.exe /k nvim \"%1\""
+
