@@ -258,6 +258,19 @@ require('lazy').setup({
     },
   },
 
+  -- file explorer (nvim-tree: https://github.com/nvim-tree/nvim-tree.lua)
+  {
+    "nvim-tree/nvim-tree.lua",
+    version = "*",
+    lazy = false,
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
+    config = function()
+      require("nvim-tree").setup {}
+    end,
+  },
+
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
   -- This is often very useful to both group configuration, as well as handle
@@ -897,6 +910,9 @@ require('lspconfig').lua_ls.setup {
   },
   capabilities = lua_capabilities,
 }
+
+-- custom autocommands (./lua/keymappings.lua)
+require 'keymappings'
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
