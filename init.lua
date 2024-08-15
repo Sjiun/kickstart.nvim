@@ -257,19 +257,25 @@ require('lazy').setup({
       },
     },
   },
-
+  -- CUSTOM:
   -- file explorer (nvim-tree: https://github.com/nvim-tree/nvim-tree.lua)
   {
-    "nvim-tree/nvim-tree.lua",
-    version = "*",
+    'nvim-tree/nvim-tree.lua',
+    version = '*',
     lazy = false,
     dependencies = {
-      "nvim-tree/nvim-web-devicons",
+      'nvim-tree/nvim-web-devicons',
     },
     config = function()
-      require("nvim-tree").setup {}
+      require('nvim-tree').setup {
+        view = { adaptive_size = true },
+      }
     end,
   },
+
+  -- CUSTOM:
+  -- gruvbox theme (https://github.com/ellisonleao/gruvbox.nvim)
+  { 'ellisonleao/gruvbox.nvim', priority = 1000, config = true, opts = { contrast = 'hard' } },
 
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
@@ -561,9 +567,10 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
-        -- tsserver = {},
+        tsserver = {},
         --
 
+        -- dockerls = {},
         lua_ls = {
           -- cmd = {...},
           -- filetypes = { ...},
@@ -590,10 +597,11 @@ require('lazy').setup({
 
       -- You can add other tools here that you want Mason to install
       -- for you, so that they are available from within Neovim.
-      -- local ensure_installed = vim.tbl_keys(servers or {})
-      -- vim.list_extend(ensure_installed, {
-      -- 'stylua', -- Used to format Lua code
-      -- })
+      local ensure_installed = vim.tbl_keys(servers or {})
+      vim.list_extend(ensure_installed, {
+        'stylua', -- Used to format Lua code
+        'tsserver', -- Used for Typescript
+      })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
@@ -644,6 +652,11 @@ require('lazy').setup({
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
         -- javascript = { { "prettierd", "prettier" } },
+        javascript = { { 'prettierd' } },
+        typescript = { { 'prettierd' } },
+        html = { { 'prettierd' } },
+        scss = { { 'prettierd' } },
+        css = { { 'prettierd' } },
       },
     },
   },
@@ -911,8 +924,13 @@ require('lspconfig').lua_ls.setup {
   capabilities = lua_capabilities,
 }
 
--- custom autocommands (./lua/keymappings.lua)
+-- CUSTOM autocommands (./lua/keymappings.lua)
 require 'keymappings'
+
+-- CUSTOM theme
+-- vim.o.background = 'light'
+vim.o.background = 'dark'
+vim.cmd [[colorscheme gruvbox]]
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
