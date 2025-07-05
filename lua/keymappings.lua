@@ -45,6 +45,12 @@ vim.keymap.set('v', '<M-f>', [[y/<C-r>=escape(@", '\/.*$^~[]')<CR>]], { desc = '
 -- vim.keymap.set('n', '<M-e>', ':E<CR>', { desc = 'open [E]xplorer' })
 -- vim.keymap.set('n', '<M-E>', '<C-w><C-v>:E<CR>', { desc = 'open [E]xplorer in vertical split' })
 
+-- console shortcuts
+vim.keymap.set('n', '<leader>cl', 'iconsole.log("");<Esc>2hi', { desc = '[C]onsole [L]og' })
+vim.keymap.set('n', '<leader>cw', 'iconsole.warn("");<Esc>2hi', { desc = '[C]onsole [W]arn' })
+vim.keymap.set('n', '<leader>ce', 'iconsole.error("");<Esc>2hi', { desc = '[C]onsole [E]rror' })
+vim.keymap.set('n', '<leader>ci', 'iconsole.info("");<Esc>2hi', { desc = '[C]onsole [I]nfo' })
+
 -- move between lines
 vim.api.nvim_set_option('whichwrap', 'lh')
 
@@ -53,3 +59,9 @@ vim.keymap.set('n', '<leader>tt', ':NvimTreeToggle<CR>', { desc = '[T]ree [T]ogg
 vim.keymap.set('n', '<leader>tf', ':NvimTreeFindFile<CR>', { desc = '[T]ree [F]ind file' })
 vim.keymap.set('n', '<leader>tc', ':NvimTreeCollapse<CR>', { desc = '[T]ree [C]ollapse' })
 vim.keymap.set('n', '<leader>te', ':NvimTreeFocus<CR>', { desc = '[T]ree Focus ([E]xplore)' })
+
+-- remap scrolling up/down
+-- vim.keymap.set('n', 'j', '<C-e>j', { noremap = true })
+-- vim.keymap.set('n', 'k', '<C-y>k', { noremap = true })
+-- vim.keymap.set('n', '<C-j>', 'j')
+-- vim.keymap.set('n', '<C-k>', 'k')
