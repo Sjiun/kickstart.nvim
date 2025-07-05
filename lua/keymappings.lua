@@ -53,3 +53,10 @@ vim.keymap.set('n', '<leader>tt', ':NvimTreeToggle<CR>', { desc = '[T]ree [T]ogg
 vim.keymap.set('n', '<leader>tf', ':NvimTreeFindFile<CR>', { desc = '[T]ree [F]ind file' })
 vim.keymap.set('n', '<leader>tc', ':NvimTreeCollapse<CR>', { desc = '[T]ree [C]ollapse' })
 vim.keymap.set('n', '<leader>te', ':NvimTreeFocus<CR>', { desc = '[T]ree Focus ([E]xplore)' })
+
+
+-- console shortcuts
+vim.keymap.set('n', '<leader>cl', 'iconsole.log("");<Esc>2hi', { desc = '[C]onsole [L]og' })
+vim.keymap.set('n', '<leader>cw', 'iconsole.warn("");<Esc>2hi', { desc = '[C]onsole [W]arn' })
+vim.keymap.set('n', '<leader>ce', 'iconsole.error("");<Esc>2hi', { desc = '[C]onsole [E]rror' })
+vim.keymap.set('n', '<leader>ci', 'iconsole.info("");<Esc>2hi', { desc = '[C]onsole [I]nfo' })
